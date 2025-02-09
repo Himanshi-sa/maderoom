@@ -1,8 +1,8 @@
 "use client";
 import { HeroUIProvider, Button } from "@heroui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { io} from "socket.io-client";
-const socket = io ("https://effective-space-waffle-wr95v9q6j75gfqg-8000.app.github.dev/");
+const socket = io ("https://maderoomo.koyeb.app/");
 
 export default function Home() {
   const [selected, setSelected] = useState("😀");
@@ -14,6 +14,13 @@ export default function Home() {
     setSelected(emoji);
     socket.emit("emoji", emoji);
   };
+
+  useEffect(() => {
+    socket.on("new_emoji", (data) => {
+      console.log(data);
+      setSelected(data);
+    });
+  }, []); 
 
   return (
     <HeroUIProvider>

@@ -21,7 +21,7 @@ io.on('connection',(socket) => {
     console.log("some one is connected",socket.id)
 
     socket.on('emoji',(emoji) => {
-        socket.broadcast.emit("new_emoji",data)
+        socket.broadcast.emit("new_emoji",emoji)
         
     })
 })
